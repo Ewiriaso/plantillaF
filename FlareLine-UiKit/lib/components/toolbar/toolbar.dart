@@ -147,10 +147,7 @@ class ToolBarWidget extends StatelessWidget {
 
                   },
                 ),
-                PopupMenuItem<String>(
-                    enabled: false,
-                    value: 'value04',
-                    child: _languagesWidget(context)),
+                // Language selector removed - CETAM uses Spanish only
                 PopupMenuItem<String>(
                   value: 'value05',
                   child: Text('Log out'),

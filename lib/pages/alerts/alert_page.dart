@@ -75,14 +75,14 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.info,
                   type: ButtonType.info.type,
                   onTap: () {
-                    QuickAlert.show(
+                    _showCustomAlert(
                       context: context,
-                      type: QuickAlertType.info,
                       title: 'Información',
-                      text: 'Esta es una alerta informativa. Los datos se han cargado correctamente.',
-                      confirmBtnText: 'Entendido',
-                      confirmBtnColor: GlobalColors.info,
-                    ); //
+                      message: 'Esta es una alerta informativa. Los datos se han cargado correctamente.',
+                      icon: Icons.info_outline,
+                      color: GlobalColors.info,
+                      confirmText: 'Entendido',
+                    );
                   },
                 ),
                 const SizedBox(
@@ -92,13 +92,13 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.success,
                   type: ButtonType.success.type,
                   onTap: () {
-                    QuickAlert.show(
+                    _showCustomAlert(
                       context: context,
-                      type: QuickAlertType.success,
                       title: 'Éxito',
-                      text: 'La operación se completó exitosamente. Todos los cambios han sido guardados.',
-                      confirmBtnText: 'Aceptar',
-                      confirmBtnColor: GlobalColors.success,
+                      message: 'La operación se completó exitosamente. Todos los cambios han sido guardados.',
+                      icon: Icons.check_circle_outline,
+                      color: GlobalColors.success,
+                      confirmText: 'Aceptar',
                     );
                   },
                 ),
@@ -109,13 +109,13 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.warn,
                   type: ButtonType.warn.type,
                   onTap: () {
-                    QuickAlert.show(
+                    _showCustomAlert(
                       context: context,
-                      type: QuickAlertType.warning,
                       title: 'Advertencia',
-                      text: 'Por favor revise los datos antes de continuar. Esta acción requiere su atención.',
-                      confirmBtnText: 'Entiendo',
-                      confirmBtnColor: GlobalColors.warn,
+                      message: 'Por favor revise los datos antes de continuar. Esta acción requiere su atención.',
+                      icon: Icons.warning_amber_rounded,
+                      color: GlobalColors.warn,
+                      confirmText: 'Entiendo',
                     );
                   },
                 ),
@@ -126,13 +126,13 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.danger,
                   type: ButtonType.danger.type,
                   onTap: () {
-                    QuickAlert.show(
+                    _showCustomAlert(
                       context: context,
-                      type: QuickAlertType.error,
                       title: 'Error',
-                      text: 'Ha ocurrido un error al procesar la solicitud. Por favor intente nuevamente.',
-                      confirmBtnText: 'Cerrar',
-                      confirmBtnColor: GlobalColors.danger,
+                      message: 'Ha ocurrido un error al procesar la solicitud. Por favor intente nuevamente.',
+                      icon: Icons.error_outline,
+                      color: GlobalColors.danger,
+                      confirmText: 'Cerrar',
                     );
                   },
                 ),
@@ -143,15 +143,14 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.confirm,
                   type: ButtonType.dark.type,
                   onTap: () {
-                    QuickAlert.show(
+                    _showCustomConfirmAlert(
                       context: context,
-                      type: QuickAlertType.confirm,
                       title: 'Confirmar Acción',
-                      text: '¿Está seguro que desea continuar con esta acción? Esta operación no se puede deshacer.',
-                      confirmBtnText: 'Sí, continuar',
-                      cancelBtnText: 'Cancelar',
-                      confirmBtnColor: GlobalColors.dark,
-                      cancelBtnTextStyle: const TextStyle(color: GlobalColors.dark),
+                      message: '¿Está seguro que desea continuar con esta acción? Esta operación no se puede deshacer.',
+                      icon: Icons.help_outline,
+                      color: GlobalColors.dark,
+                      confirmText: 'Sí, continuar',
+                      cancelText: 'Cancelar',
                     );
                   },
                 ),
@@ -417,6 +416,224 @@ class AlertPage extends LayoutWidget {
           )
         ],
       ),
+    );
+  }
+
+  // Función para mostrar alerta personalizada con colores CETAM consistentes
+  void _showCustomAlert({
+    required BuildContext context,
+    required String title,
+    required String message,
+    required IconData icon,
+    required Color color,
+    required String confirmText,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Icono con fondo circular del color correspondiente
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 48,
+                    color: color,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Título
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: GlobalColors.text,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                // Mensaje
+                Text(
+                  message,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: GlobalColors.textSecondary,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                // Botón de confirmación
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: color,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      confirmText,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  // Función para mostrar alerta de confirmación
+  void _showCustomConfirmAlert({
+    required BuildContext context,
+    required String title,
+    required String message,
+    required IconData icon,
+    required Color color,
+    required String confirmText,
+    required String cancelText,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Icono con fondo circular
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 48,
+                    color: color,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Título
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: GlobalColors.text,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                // Mensaje
+                Text(
+                  message,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: GlobalColors.textSecondary,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                // Botones de acción
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: color,
+                            side: BorderSide(color: color, width: 2),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            cancelText,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            // Aquí iría la acción confirmada
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Acción confirmada'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: color,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            elevation: 0,
+                          ),
+                          child: Text(
+                            confirmText,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
