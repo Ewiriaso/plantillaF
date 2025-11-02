@@ -15,8 +15,15 @@ class CalendarPage extends LayoutWidget {
 
   @override
   Widget contentDesktopWidget(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = MediaQuery.of(context).size.width < 768;
+    final calendarHeight = isMobile
+        ? screenHeight * 0.75
+        : 800.0;
+
     return CommonCard(
-      height: 800,
+      height: calendarHeight,
+      padding: const EdgeInsets.all(1),
       child: SfCalendar(
         view: CalendarView.month,
         todayTextStyle: const TextStyle(color: GlobalColors.primary),
@@ -24,19 +31,23 @@ class CalendarPage extends LayoutWidget {
         headerStyle: const CalendarHeaderStyle(
           backgroundColor: Colors.transparent,
         ),
-        monthViewSettings: const MonthViewSettings(
+        monthViewSettings: MonthViewSettings(
             showAgenda: true,
-            // dayFormat: 'EEEE',
-            agendaViewHeight: 200,
-            agendaStyle: AgendaStyle(
-                appointmentTextStyle: TextStyle(color: GlobalColors.danger))),
-        viewHeaderHeight: 60,
-        headerHeight: 60,
-        viewHeaderStyle: const ViewHeaderStyle(
+            agendaViewHeight: isMobile ? 150 : 200,
+            agendaStyle: const AgendaStyle(
+                appointmentTextStyle: TextStyle(color: GlobalColors.danger)),
+            monthCellStyle: const MonthCellStyle(
+              trailingDatesBackgroundColor: Colors.transparent,
+              leadingDatesBackgroundColor: Colors.transparent,
+            )),
+        cellBorderColor: GlobalColors.border,
+        viewHeaderHeight: isMobile ? 50 : 60,
+        headerHeight: isMobile ? 50 : 60,
+        viewHeaderStyle: ViewHeaderStyle(
           backgroundColor: GlobalColors.primary,
           dayTextStyle: TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: isMobile ? 16 : 20,
           ),
         ),
       ),

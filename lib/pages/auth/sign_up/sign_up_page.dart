@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flareline_uikit/components/buttons/button_widget.dart';
 import 'package:flareline_uikit/components/card/common_card.dart';
 import 'package:flareline_uikit/components/forms/outborder_text_form_field.dart';
+import 'package:flareline/core/theme/global_colors.dart';
 import 'package:flareline/flutter_gen/app_localizations.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -15,22 +16,21 @@ class SignUpWidget extends BaseWidget<SignUpProvider> {
   @override
   Widget bodyWidget(
       BuildContext context, SignUpProvider viewModel, Widget? child) {
-    return Scaffold(body: SafeArea(
-      child: ResponsiveBuilder(
-        builder: (context, sizingInformation) {
-          // Check the sizing information here and return your UI
-          if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
-            return Center(
-              child: contentDesktopWidget(context,viewModel),
+    return Scaffold(
+      backgroundColor: GlobalColors.background,
+      body: SafeArea(
+        child: ResponsiveBuilder(
+          builder: (context, sizingInformation) {
+            if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+              return contentDesktopWidget(context,viewModel);
+            }
+            return SingleChildScrollView(
+              child: contentMobileWidget(context,viewModel),
             );
-          }
-
-          return SingleChildScrollView(
-            child: contentMobileWidget(context,viewModel),
-          );
-        },
-      ),
-    ));
+          },
+        ),
+      )
+    );
   }
 
   @override
@@ -39,68 +39,132 @@ class SignUpWidget extends BaseWidget<SignUpProvider> {
   }
 
   Widget contentDesktopWidget(BuildContext context, SignUpProvider viewModel) {
-    return Column(mainAxisSize: MainAxisSize.min, children: [
-      CommonCard(
-        width: MediaQuery.of(context).size.width * 0.8,
-        padding: const EdgeInsets.symmetric(vertical: 100),
-        child: Row(children: [
-          Expanded(
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 1200),
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
               child: Column(
-            children: [
-              Text(
-                AppLocalizations.of(context)!.appName,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.appName,
+                    style: const TextStyle(
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold,
+                      color: GlobalColors.primary,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    AppLocalizations.of(context)!.slogan,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: GlobalColors.textSecondary,
+                      height: 1.6,
+                    ),
+                  ),
+                  const SizedBox(height: 48),
+                  SizedBox(
+                    width: 450,
+                    child: SvgPicture.asset('assets/signin/signup.svg',
+                        semanticsLabel: ''),
+                  )
+                ],
               ),
-              const SizedBox(
-                height: 16,
+            ),
+            const SizedBox(width: 80),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(48),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: GlobalColors.primary.withOpacity(0.08),
+                      blurRadius: 24,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: _formWidget(context, viewModel),
               ),
-              Text(AppLocalizations.of(context)!.slogan),
-              const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                width: 350,
-                child: SvgPicture.asset('assets/signin/signup.svg',
-                    semanticsLabel: ''),
-              )
-            ],
-          )),
-          const VerticalDivider(
-            width: 1,
-          ),
-          Expanded(child: _formWidget(context,viewModel))
-        ]),
+            )
+          ],
+        ),
       ),
-    ]);
+    );
   }
 
   Widget contentMobileWidget(BuildContext context, SignUpProvider viewModel) {
-    return CommonCard(
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
-      child: _formWidget(context,viewModel),
+    return Container(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          const SizedBox(height: 40),
+          Text(
+            AppLocalizations.of(context)!.appName,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: GlobalColors.primary,
+            ),
+          ),
+          const SizedBox(height: 40),
+          Container(
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: GlobalColors.primary.withOpacity(0.08),
+                  blurRadius: 24,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: _formWidget(context, viewModel),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _formWidget(BuildContext context, SignUpProvider viewModel) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double horizontalPadding = screenWidth > 600 ? 50 : 20;
+    double horizontalPadding = screenWidth > 600 ? 0 : 20;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(AppLocalizations.of(context)!.startForFree),
-          const SizedBox(
-            height: 12,
-          ),
           Text(
             AppLocalizations.of(context)!.startForFree,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: GlobalColors.primary,
+            ),
           ),
           const SizedBox(
-            height: 16,
+            height: 8,
+          ),
+          Text(
+            'Crea tu cuenta y comienza ahora',
+            style: const TextStyle(
+              fontSize: 14,
+              color: GlobalColors.textSecondary,
+            ),
+          ),
+          const SizedBox(
+            height: 32,
           ),
           OutBorderTextFormField(
             labelText: AppLocalizations.of(context)!.email,
@@ -142,26 +206,40 @@ class SignUpWidget extends BaseWidget<SignUpProvider> {
             controller: viewModel.rePasswordController,
           ),
           const SizedBox(
-            height: 20,
+            height: 24,
           ),
           ButtonWidget(
-            type: ButtonType.primary.type,
+            type: ButtonType.secondary.type,
             btnText: AppLocalizations.of(context)!.createAccount,
+            height: 48,
+            fontSize: 16,
+            borderRadius: 8,
             onTap: () {
               viewModel.signUp(context);
             },
           ),
           const SizedBox(
-            height: 20,
+            height: 32,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(AppLocalizations.of(context)!.haveAnAccount),
+              Text(
+                AppLocalizations.of(context)!.haveAnAccount,
+                style: const TextStyle(
+                  color: GlobalColors.textSecondary,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(width: 4),
               InkWell(
                 child: Text(
                   AppLocalizations.of(context)!.signIn,
-                  style: const TextStyle(color: Colors.blue),
+                  style: const TextStyle(
+                    color: GlobalColors.secondary,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 onTap: () {
                   Navigator.of(context).popAndPushNamed('/signIn');

@@ -35,7 +35,7 @@ class DropZoneWidget extends StatelessWidget {
                   return Container(
                     decoration: BoxDecoration(
                         color: isDragging
-                            ? Colors.blue.withOpacity(0.4)
+                            ? FlarelineColors.primary.withOpacity(0.1)
                             : Colors.white,
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(

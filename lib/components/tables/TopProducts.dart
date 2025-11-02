@@ -42,11 +42,13 @@ class TopProductsWidget extends StatelessWidget {
             return const LoadingWidget();
           }
 
-          return ConstrainedBox(
-              constraints: const BoxConstraints(minWidth: double.infinity),
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: MediaQuery.of(context).size.width - 64,
+              ),
               child: DataTable(
-                  // headingRowColor: MaterialStateProperty.resolveWith(
-                  //     (states) => Colors.green),
                   horizontalMargin: 12,
                   showBottomBorder: true,
                   showCheckboxColumn: false,
@@ -89,7 +91,8 @@ class TopProductsWidget extends StatelessWidget {
                               ),
                             ],
                           ))
-                      .toList()));
+                      .toList())),
+          );
         }));
   }
 }

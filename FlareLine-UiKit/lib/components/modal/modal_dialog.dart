@@ -21,21 +21,19 @@ class ModalDialog {
     GestureTapCallback? onCancelTap,
     GestureTapCallback? onSaveTap}) {
     if (width == null) {
-      if (modalType == ModalType.large) {
-        width = MediaQuery
-            .of(context)
-            .size
-            .width * 0.6;
-      } else if (modalType == ModalType.medium) {
-        width = MediaQuery
-            .of(context)
-            .size
-            .width * 0.4;
-      } else if (modalType == ModalType.small) {
-        width = MediaQuery
-            .of(context)
-            .size
-            .width * 0.28;
+      final screenWidth = MediaQuery.of(context).size.width;
+      final isMobile = screenWidth < 768;
+
+      if (isMobile) {
+        width = screenWidth * 0.9;
+      } else {
+        if (modalType == ModalType.large) {
+          width = screenWidth * 0.6;
+        } else if (modalType == ModalType.medium) {
+          width = screenWidth * 0.4;
+        } else if (modalType == ModalType.small) {
+          width = screenWidth * 0.28;
+        }
       }
     }
 
@@ -72,6 +70,9 @@ class ModalDialog {
                     type: MaterialType.transparency,
                     child: Container(
                       width: width,
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height * 0.85,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(4),
@@ -118,10 +119,12 @@ class ModalDialog {
                               height: 0.2,
                               color: FlarelineColors.darkBorder,
                             ),
-                          SingleChildScrollView(
-                            child: Padding(
-                              child: child,
-                              padding: const EdgeInsets.all(20),
+                          Flexible(
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                child: child,
+                                padding: const EdgeInsets.all(20),
+                              ),
                             ),
                           ),
                           const SizedBox(

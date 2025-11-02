@@ -131,6 +131,49 @@ class ButtonPage extends LayoutWidget {
             SizedBox(
               width: 100,
               child: ButtonWidget(
+                btnText: 'Secondary',
+                type: ButtonType.secondary.type,
+                borderRadius: 0,
+              ),
+            ),
+            SizedBox(
+              width: 100,
+              child: ButtonWidget(
+                btnText: 'Secondary',
+                type: ButtonType.secondary.type,
+                borderRadius: 5,
+              ),
+            ),
+            SizedBox(
+              width: 100,
+              child: ButtonWidget(
+                btnText: 'Secondary',
+                type: ButtonType.secondary.type,
+                borderRadius: 30,
+              ),
+            ),
+            SizedBox(
+              width: 100,
+              child: ButtonWidget(
+                btnText: 'Secondary',
+                color: Colors.white,
+                borderRadius: 5,
+                borderColor: GlobalColors.secondary,
+                textColor: GlobalColors.secondary,
+              ),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Wrap(
+          spacing: 20,
+          runSpacing: 16,
+          children: [
+            SizedBox(
+              width: 100,
+              child: ButtonWidget(
                 btnText: 'Success',
                 type: ButtonType.success.type,
                 borderRadius: 0,
@@ -457,6 +500,65 @@ class ButtonPage extends LayoutWidget {
                 borderRadius: 5,
                 borderColor: GlobalColors.primary,
                 textColor: GlobalColors.primary,
+              ),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Wrap(
+          spacing: 20,
+          runSpacing: 16,
+          children: [
+            SizedBox(
+              width: 180,
+              child: ButtonWidget(
+                iconWidget: const Icon(
+                  Icons.local_offer,
+                  color: Colors.white,
+                ),
+                btnText: 'Secondary With Icon',
+                type: ButtonType.secondary.type,
+                borderRadius: 0,
+              ),
+            ),
+            SizedBox(
+              width: 180,
+              child: ButtonWidget(
+                iconWidget: const Icon(
+                  Icons.local_offer,
+                  color: Colors.white,
+                ),
+                btnText: 'Secondary With Icon',
+                type: ButtonType.secondary.type,
+                borderRadius: 5,
+              ),
+            ),
+            SizedBox(
+              width: 180,
+              child: ButtonWidget(
+                iconWidget: const Icon(
+                  Icons.local_offer,
+                  color: Colors.white,
+                ),
+                btnText: 'Secondary With Icon',
+                type: ButtonType.secondary.type,
+                borderRadius: 30,
+              ),
+            ),
+            SizedBox(
+              width: 180,
+              child: ButtonWidget(
+                iconWidget: const Icon(
+                  Icons.local_offer,
+                  color: GlobalColors.secondary,
+                ),
+                btnText: 'Secondary With Icon',
+                color: Colors.white,
+                borderRadius: 5,
+                borderColor: GlobalColors.secondary,
+                textColor: GlobalColors.secondary,
               ),
             )
           ],

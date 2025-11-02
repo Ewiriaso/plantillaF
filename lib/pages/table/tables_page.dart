@@ -13,17 +13,20 @@ class TablesPage extends LayoutWidget {
 
   @override
   Widget contentDesktopWidget(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 768;
+    final tableHeight = isMobile ? 400.0 : 450.0;
+
     return Column(
       children: [
-        SizedBox(height: 450, width: double.maxFinite, child: TopChannelWidget()),
+        SizedBox(height: tableHeight, width: double.maxFinite, child: TopChannelWidget()),
         const SizedBox(
           height: 16,
         ),
-        const SizedBox(height: 450, width: double.maxFinite,  child:TopProductsWidget()),
+        SizedBox(height: tableHeight, width: double.maxFinite,  child:TopProductsWidget()),
         const SizedBox(
           height: 16,
         ),
-        const SizedBox(height: 450, width: double.maxFinite,  child:InvoiceTableWidget()),
+        SizedBox(height: tableHeight, width: double.maxFinite,  child:InvoiceTableWidget()),
       ],
     );
   }

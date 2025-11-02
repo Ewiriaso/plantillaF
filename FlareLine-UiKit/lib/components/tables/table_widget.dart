@@ -160,14 +160,17 @@ abstract class TableWidget<S extends BaseTableProvider>
       checkboxColumnSettings: DataGridCheckboxColumnSettings(width: 80),
       footerFrozenColumnsCount: isLastColumnFixed ? 1 : 0,
       isScrollbarAlwaysShown: true,
-      columnWidthMode: columnWidthMode,
+      columnWidthMode: isMobile ? ColumnWidthMode.none : columnWidthMode,
       columns: headers.map((e) => gridColumnWidget(e, isMobile)).toList(),
     );
   }
 
-  double gridColumnWidgetWidth(String e) {
+  double gridColumnWidgetWidth(String e, bool isMobile) {
     if (e == 'Action') {
       return actionColumnWidth;
+    }
+    if (isMobile) {
+      return 120;
     }
     return double.nan;
   }
@@ -186,7 +189,7 @@ abstract class TableWidget<S extends BaseTableProvider>
       align = e['align'];
     }
     return GridColumn(
-      width: gridColumnWidgetWidth(columnName),
+      width: gridColumnWidgetWidth(columnName, isMobile),
       columnName: columnName,
       visible: isColumnVisible(columnName, isMobile),
       label: Container(

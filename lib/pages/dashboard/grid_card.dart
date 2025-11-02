@@ -112,14 +112,14 @@ class GridCard extends StatelessWidget {
                   percentText,
                   style: TextStyle(
                       fontSize: 10,
-                      color: isGrow ? Colors.green : Colors.lightBlue),
+                      color: isGrow ? GlobalColors.success : GlobalColors.info),
                 ),
                 const SizedBox(
                   width: 3,
                 ),
                 Icon(
                   isGrow ? Icons.arrow_upward : Icons.arrow_downward,
-                  color: isGrow ? Colors.green : Colors.lightBlue,
+                  color: isGrow ? GlobalColors.success : GlobalColors.info,
                   size: 12,
                 )
               ],

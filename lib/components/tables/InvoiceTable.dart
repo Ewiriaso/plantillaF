@@ -30,8 +30,12 @@ class InvoiceTableWidget extends StatelessWidget {
             return LoadingWidget();
           }
 
-          return ConstrainedBox(
-              constraints: const BoxConstraints(minWidth: double.infinity),
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: MediaQuery.of(context).size.width - 64,
+              ),
               child: DataTable(
                   headingRowColor: MaterialStateProperty.resolveWith(
                       (states) => GlobalColors.lightGray),
@@ -73,10 +77,10 @@ class InvoiceTableWidget extends StatelessWidget {
                                     e.revenues,
                                     style: TextStyle(
                                         color: e.revenues == 'Unpaid'
-                                            ? Colors.red
+                                            ? GlobalColors.danger
                                             : e.revenues == 'Peding'
-                                                ? Colors.orange
-                                                : Colors.green,
+                                                ? GlobalColors.warning
+                                                : GlobalColors.success,
                                         fontSize: 13),
                                   ),
                                   padding: EdgeInsets.symmetric(
@@ -84,10 +88,10 @@ class InvoiceTableWidget extends StatelessWidget {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(45),
                                       color: e.revenues == 'Unpaid'
-                                          ? Colors.red.shade50
+                                          ? GlobalColors.danger.withOpacity(0.1)
                                           : e.revenues == 'Peding'
-                                              ? Colors.orange.shade50
-                                              : Colors.green.shade50),
+                                              ? GlobalColors.warning.withOpacity(0.1)
+                                              : GlobalColors.success.withOpacity(0.1)),
                                 ),
                               ),
                               DataCell(
@@ -95,7 +99,8 @@ class InvoiceTableWidget extends StatelessWidget {
                               ),
                             ],
                           ))
-                      .toList()));
+                      .toList())),
+          );
         }));
   }
 }

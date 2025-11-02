@@ -1,6 +1,7 @@
 library flareline_uikit;
 
 import 'package:flutter/material.dart';
+import 'package:flareline_uikit/core/theme/flareline_colors.dart';
 
 
 class BreakTab extends StatelessWidget {
@@ -36,7 +37,7 @@ class BreakTab extends StatelessWidget {
           ),
           Text(
             title,
-            style: const TextStyle(fontSize: 14, color: Colors.blue),
+            style: const TextStyle(fontSize: 14, color: FlarelineColors.primary),
           )
         ],
       )),

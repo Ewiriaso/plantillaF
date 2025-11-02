@@ -38,7 +38,7 @@ class ToolBarWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade200, width: 1)),
                 alignment: Alignment.center,
-                child: const Icon(Icons.more_vert),
+                child: const Icon(Icons.menu),
               ),
               onTap: () {
                 if (Scaffold.of(context).isDrawerOpen) {

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 enum ButtonType {
   normal('normal'),
   primary('primary'),
+  secondary('secondary'),
   success('success'),
   info('info'),
   warn('warn'),
@@ -89,6 +90,9 @@ class ButtonWidget extends StatelessWidget {
   Color getTypeColor(String? type) {
     if (type == ButtonType.primary.type) {
       return ButtonColors.primary;
+    }
+    if (type == ButtonType.secondary.type) {
+      return ButtonColors.secondary;
     }
     if (type == ButtonType.success.type) {
       return ButtonColors.success;

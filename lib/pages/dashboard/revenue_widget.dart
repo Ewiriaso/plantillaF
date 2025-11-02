@@ -3,6 +3,7 @@ import 'package:flareline_uikit/components/card/common_card.dart';
 import 'package:flareline/components/charts/bar_chart.dart';
 import 'package:flareline_uikit/components/charts/line_chart.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:flareline/core/theme/global_colors.dart';
 
 class RevenueWidget extends StatelessWidget {
   const RevenueWidget({super.key});
@@ -67,7 +68,7 @@ class RevenueWidget extends StatelessWidget {
         datas: const [
            {
             'name': 'Marketing Sales',
-            'color': Color(0xFFFE8111),
+            'color': GlobalColors.secondary,
             'data': [
               {'x': 'Jan', 'y': 25},
               {'x': 'Fed', 'y': 75},
@@ -85,7 +86,7 @@ class RevenueWidget extends StatelessWidget {
           },
           {
             'name': 'Cases Sales',
-            'color': Color(0xFF01B7F9),
+            'color': GlobalColors.info,
             'data': [
               {'x': 'Jan', 'y': 70},
               {'x': 'Fed', 'y': 30},
