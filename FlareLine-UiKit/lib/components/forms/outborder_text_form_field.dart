@@ -41,10 +41,25 @@ class OutBorderTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width to determine if mobile
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isMobile = screenWidth < 600;
+
+    // Responsive font sizes
+    double labelFontSize = isMobile ? 14 : 15;
+    double inputFontSize = isMobile ? 15 : 16;
+    double hintFontSize = isMobile ? 14 : 15;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (labelText != null) Text(labelText ?? '',style: TextStyle(fontSize: 14),),
+        if (labelText != null) Text(
+          labelText ?? '',
+          style: TextStyle(
+            fontSize: labelFontSize,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
         if (labelText != null)
           const SizedBox(
             height: 8,
@@ -66,7 +81,7 @@ class OutBorderTextFormField extends StatelessWidget {
                   validator: validator,
                   textInputAction: textInputAction,
                   onFieldSubmitted: onFieldSubmitted,
-                  style: textStyle,
+                  style: textStyle ?? TextStyle(fontSize: inputFontSize),
                   decoration: InputDecoration(
                     prefixIcon: icon,
                     prefixIconConstraints: const BoxConstraints(
@@ -90,7 +105,10 @@ class OutBorderTextFormField extends StatelessWidget {
                     ),
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintText: hintText,
-                    hintStyle: hintStyle
+                    hintStyle: hintStyle ?? TextStyle(
+                      fontSize: hintFontSize,
+                      color: FlarelineColors.darkTextBody.withOpacity(0.6),
+                    ),
                   ),
                 ),
               ),

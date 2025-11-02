@@ -78,6 +78,7 @@ class AlertPage extends LayoutWidget {
                     QuickAlert.show(
                       context: context,
                       type: QuickAlertType.info,
+                      confirmBtnColor: GlobalColors.info,
                     ); //
                   },
                 ),
@@ -91,6 +92,7 @@ class AlertPage extends LayoutWidget {
                     QuickAlert.show(
                       context: context,
                       type: QuickAlertType.success,
+                      confirmBtnColor: GlobalColors.success,
                     );
                   },
                 ),
@@ -104,6 +106,7 @@ class AlertPage extends LayoutWidget {
                     QuickAlert.show(
                       context: context,
                       type: QuickAlertType.warning,
+                      confirmBtnColor: GlobalColors.warn,
                     );
                   },
                 ),
@@ -117,6 +120,7 @@ class AlertPage extends LayoutWidget {
                     QuickAlert.show(
                       context: context,
                       type: QuickAlertType.error,
+                      confirmBtnColor: GlobalColors.danger,
                     );
                   },
                 ),
@@ -130,6 +134,8 @@ class AlertPage extends LayoutWidget {
                     QuickAlert.show(
                       context: context,
                       type: QuickAlertType.confirm,
+                      confirmBtnColor: GlobalColors.dark,
+                      cancelBtnTextStyle: const TextStyle(color: GlobalColors.dark),
                     );
                   },
                 ),

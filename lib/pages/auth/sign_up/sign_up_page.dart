@@ -103,21 +103,21 @@ class SignUpWidget extends BaseWidget<SignUpProvider> {
 
   Widget contentMobileWidget(BuildContext context, SignUpProvider viewModel) {
     return Container(
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 24),
           Text(
             AppLocalizations.of(context)!.appName,
             style: const TextStyle(
-              fontSize: 32,
+              fontSize: 28,
               fontWeight: FontWeight.bold,
               color: GlobalColors.primary,
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 24),
           Container(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
@@ -131,6 +131,7 @@ class SignUpWidget extends BaseWidget<SignUpProvider> {
             ),
             child: _formWidget(context, viewModel),
           ),
+          const SizedBox(height: 24),
         ],
       ),
     );
@@ -138,117 +139,114 @@ class SignUpWidget extends BaseWidget<SignUpProvider> {
 
   Widget _formWidget(BuildContext context, SignUpProvider viewModel) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double horizontalPadding = screenWidth > 600 ? 0 : 20;
+    bool isMobile = screenWidth < 600;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            AppLocalizations.of(context)!.startForFree,
-            style: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: GlobalColors.primary,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          AppLocalizations.of(context)!.startForFree,
+          style: TextStyle(
+            fontSize: isMobile ? 22 : 28,
+            fontWeight: FontWeight.bold,
+            color: GlobalColors.primary,
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Text(
+          'Crea tu cuenta y comienza ahora',
+          style: TextStyle(
+            fontSize: isMobile ? 13 : 14,
+            color: GlobalColors.textSecondary,
+          ),
+        ),
+        SizedBox(
+          height: isMobile ? 20 : 32,
+        ),
+        OutBorderTextFormField(
+          labelText: AppLocalizations.of(context)!.email,
+          hintText: AppLocalizations.of(context)!.emailHint,
+          keyboardType: TextInputType.emailAddress,
+          suffixWidget: SvgPicture.asset(
+            'assets/signin/email.svg',
+            width: 22,
+            height: 22,
+          ),
+          controller: viewModel.emailController,
+        ),
+        SizedBox(
+          height: isMobile ? 12 : 16,
+        ),
+        OutBorderTextFormField(
+          obscureText: true,
+          labelText: AppLocalizations.of(context)!.password,
+          hintText: AppLocalizations.of(context)!.passwordHint,
+          suffixWidget: SvgPicture.asset(
+            'assets/signin/lock.svg',
+            width: 22,
+            height: 22,
+          ),
+          controller: viewModel.passwordController,
+        ),
+        SizedBox(
+          height: isMobile ? 12 : 20,
+        ),
+        OutBorderTextFormField(
+          obscureText: true,
+          labelText: AppLocalizations.of(context)!.retypePassword,
+          hintText: AppLocalizations.of(context)!.retypePasswordHint,
+          suffixWidget: SvgPicture.asset(
+            'assets/signin/lock.svg',
+            width: 22,
+            height: 22,
+          ),
+          controller: viewModel.rePasswordController,
+        ),
+        SizedBox(
+          height: isMobile ? 16 : 24,
+        ),
+        ButtonWidget(
+          type: ButtonType.secondary.type,
+          btnText: AppLocalizations.of(context)!.createAccount,
+          height: isMobile ? 44 : 48,
+          fontSize: isMobile ? 15 : 16,
+          borderRadius: 8,
+          onTap: () {
+            viewModel.signUp(context);
+          },
+        ),
+        SizedBox(
+          height: isMobile ? 20 : 32,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              AppLocalizations.of(context)!.haveAnAccount,
+              style: TextStyle(
+                color: GlobalColors.textSecondary,
+                fontSize: isMobile ? 13 : 14,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(
-            'Crea tu cuenta y comienza ahora',
-            style: const TextStyle(
-              fontSize: 14,
-              color: GlobalColors.textSecondary,
-            ),
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          OutBorderTextFormField(
-            labelText: AppLocalizations.of(context)!.email,
-            hintText: AppLocalizations.of(context)!.emailHint,
-            keyboardType: TextInputType.emailAddress,
-            suffixWidget: SvgPicture.asset(
-              'assets/signin/email.svg',
-              width: 22,
-              height: 22,
-            ),
-            controller: viewModel.emailController,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          OutBorderTextFormField(
-            obscureText: true,
-            labelText: AppLocalizations.of(context)!.password,
-            hintText: AppLocalizations.of(context)!.passwordHint,
-            suffixWidget: SvgPicture.asset(
-              'assets/signin/lock.svg',
-              width: 22,
-              height: 22,
-            ),
-            controller: viewModel.passwordController,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          OutBorderTextFormField(
-            obscureText: true,
-            labelText: AppLocalizations.of(context)!.retypePassword,
-            hintText: AppLocalizations.of(context)!.retypePasswordHint,
-            suffixWidget: SvgPicture.asset(
-              'assets/signin/lock.svg',
-              width: 22,
-              height: 22,
-            ),
-            controller: viewModel.rePasswordController,
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          ButtonWidget(
-            type: ButtonType.secondary.type,
-            btnText: AppLocalizations.of(context)!.createAccount,
-            height: 48,
-            fontSize: 16,
-            borderRadius: 8,
-            onTap: () {
-              viewModel.signUp(context);
-            },
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                AppLocalizations.of(context)!.haveAnAccount,
-                style: const TextStyle(
-                  color: GlobalColors.textSecondary,
-                  fontSize: 14,
+            const SizedBox(width: 4),
+            InkWell(
+              child: Text(
+                AppLocalizations.of(context)!.signIn,
+                style: TextStyle(
+                  color: GlobalColors.secondary,
+                  fontSize: isMobile ? 13 : 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(width: 4),
-              InkWell(
-                child: Text(
-                  AppLocalizations.of(context)!.signIn,
-                  style: const TextStyle(
-                    color: GlobalColors.secondary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context).popAndPushNamed('/signIn');
-                },
-              )
-            ],
-          )
-        ],
-      ),
+              onTap: () {
+                Navigator.of(context).popAndPushNamed('/signIn');
+              },
+            )
+          ],
+        )
+      ],
     );
   }
 

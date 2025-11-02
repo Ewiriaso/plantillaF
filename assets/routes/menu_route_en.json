@@ -94,6 +94,18 @@
           {
             "menuName": "Modal",
             "path": "/modal"
+          },
+          {
+            "menuName": "Text Fields",
+            "path": "/textFields"
+          },
+          {
+            "menuName": "Image Upload",
+            "path": "/imageUpload"
+          },
+          {
+            "menuName": "Cards",
+            "path": "/cards"
           }
         ]
       },

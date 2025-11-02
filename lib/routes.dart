@@ -6,6 +6,9 @@ import 'package:flareline/pages/tools/tools_page.dart' deferred as tools;
 import 'package:flutter/material.dart';
 import 'package:flareline/pages/alerts/alert_page.dart' deferred as alert;
 import 'package:flareline/pages/button/button_page.dart' deferred as button;
+import 'package:flareline/pages/ui_elements/text_field_page.dart' deferred as textField;
+import 'package:flareline/pages/ui_elements/image_upload_page.dart' deferred as imageUpload;
+import 'package:flareline/pages/ui_elements/cards_page.dart' deferred as cards;
 import 'package:flareline/pages/form/form_elements_page.dart' deferred as formElements;
 import 'package:flareline/pages/form/form_layout_page.dart' deferred as formLayout;
 import 'package:flareline/pages/auth/sign_in/sign_in_page.dart' deferred as signIn;
@@ -51,6 +54,9 @@ final List<Map<String, Object>> MAIN_PAGES = [
     'routerPath': '/modal',
     'widget': DeferredWidget(modal.loadLibrary, () => modal.ModalPage())
   },
+  {'routerPath': '/textFields', 'widget': DeferredWidget(textField.loadLibrary, () => textField.TextFieldPage())},
+  {'routerPath': '/imageUpload', 'widget': DeferredWidget(imageUpload.loadLibrary, () => imageUpload.ImageUploadPage())},
+  {'routerPath': '/cards', 'widget': DeferredWidget(cards.loadLibrary, () => cards.CardsPage())},
 ];
 
 class RouteConfiguration {
