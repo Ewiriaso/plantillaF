@@ -171,22 +171,14 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.info,
                   type: ButtonType.info.type,
                   onTap: () {
-                    Alert(
+                    _showSimpleAlert(
                       context: context,
-                      type: AlertType.info,
-                      title: AppLocalizations.of(context)!.rflutterAlert,
-                      desc: AppLocalizations.of(context)!.rflutterTip,
-                      buttons: [
-                        DialogButton(
-                          child: Text(
-                            AppLocalizations.of(context)!.cool,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                          width: 120,
-                        )
-                      ],
-                    ).show();//
+                      title: 'Alerta Simple',
+                      message: 'Esta es una alerta simple de estilo alternativo.',
+                      icon: Icons.info_outline,
+                      color: GlobalColors.info,
+                      confirmText: 'Entendido',
+                    );
                   },
                 ),
                 const SizedBox(
@@ -196,22 +188,14 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.success,
                   type: ButtonType.success.type,
                   onTap: () {
-                    Alert(
+                    _showSimpleAlert(
                       context: context,
-                      type: AlertType.success,
-                      title: AppLocalizations.of(context)!.rflutterAlert,
-                      desc: AppLocalizations.of(context)!.rflutterTip,
-                      buttons: [
-                        DialogButton(
-                          child: Text(
-                            AppLocalizations.of(context)!.cool,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                          width: 120,
-                        )
-                      ],
-                    ).show();//
+                      title: 'Operación Exitosa',
+                      message: 'La operación se realizó correctamente.',
+                      icon: Icons.check_circle_outline,
+                      color: GlobalColors.success,
+                      confirmText: 'Aceptar',
+                    );
                   },
                 ),
                 const SizedBox(
@@ -221,22 +205,14 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.warn,
                   type: ButtonType.warn.type,
                   onTap: () {
-                    Alert(
+                    _showSimpleAlert(
                       context: context,
-                      type: AlertType.warning,
-                      title: AppLocalizations.of(context)!.rflutterAlert,
-                      desc: AppLocalizations.of(context)!.rflutterTip,
-                      buttons: [
-                        DialogButton(
-                          child: Text(
-                            AppLocalizations.of(context)!.cool,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                          width: 120,
-                        )
-                      ],
-                    ).show();//
+                      title: 'Atención',
+                      message: 'Tenga precaución con esta acción.',
+                      icon: Icons.warning_amber_rounded,
+                      color: GlobalColors.warn,
+                      confirmText: 'Entiendo',
+                    );
                   },
                 ),
                 const SizedBox(
@@ -246,22 +222,14 @@ class AlertPage extends LayoutWidget {
                   btnText: AppLocalizations.of(context)!.danger,
                   type: ButtonType.danger.type,
                   onTap: () {
-                    Alert(
+                    _showSimpleAlert(
                       context: context,
-                      type: AlertType.error,
-                      title: AppLocalizations.of(context)!.rflutterAlert,
-                      desc: AppLocalizations.of(context)!.rflutterTip,
-                      buttons: [
-                        DialogButton(
-                          child: Text(
-                            AppLocalizations.of(context)!.cool,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                          width: 120,
-                        )
-                      ],
-                    ).show();//
+                      title: 'Error Detectado',
+                      message: 'Se ha producido un error en el sistema.',
+                      icon: Icons.error_outline,
+                      color: GlobalColors.danger,
+                      confirmText: 'Cerrar',
+                    );
                   },
                 ),
                 const SizedBox(
@@ -274,23 +242,14 @@ class AlertPage extends LayoutWidget {
                   borderColor: GlobalColors.normal,
                   textColor: GlobalColors.normal,
                   onTap: () {
-                    Alert(
+                    _showSimpleAlert(
                       context: context,
-                      type: AlertType.none,
-                      title: AppLocalizations.of(context)!.rflutterAlert,
-                      desc: AppLocalizations.of(context)!.rflutterTip,
-                      buttons: [
-                        DialogButton(
-                          child: Text(
-                            AppLocalizations.of(context)!.cool,
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () => Navigator.pop(context),
-                          width: 120,
-                          color: GlobalColors.primary,
-                        )
-                      ],
-                    ).show();//
+                      title: 'Notificación',
+                      message: 'Esta es una notificación simple sin tipo específico.',
+                      icon: Icons.notifications_outlined,
+                      color: GlobalColors.primary,
+                      confirmText: 'Ok',
+                    );
                   },
                 ),
                 const SizedBox(
@@ -303,32 +262,15 @@ class AlertPage extends LayoutWidget {
                   borderColor: GlobalColors.normal,
                   textColor: GlobalColors.normal,
                   onTap: () {
-                    Alert(
+                    _showSimpleConfirmAlert(
                       context: context,
-                      type: AlertType.none,
-                      title: AppLocalizations.of(context)!.rflutterAlert,
-                      desc: AppLocalizations.of(context)!.rflutterTip,
-                      buttons: [
-                        DialogButton(
-                          onPressed: () => Navigator.pop(context),
-                          width: 60,
-                          child:  Text(
-                            AppLocalizations.of(context)!.cancel,
-                            style: TextStyle(color: GlobalColors.primary, fontSize: 14),
-                          ),
-                        ),
-                        DialogButton(
-                          onPressed: () => Navigator.pop(context),
-                          width: 60,
-                          color: GlobalColors.primary,
-                          margin: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            AppLocalizations.of(context)!.confirm,
-                            style: TextStyle(color: Colors.white, fontSize: 14),
-                          ),
-                        )
-                      ],
-                    ).show();//
+                      title: '¿Continuar?',
+                      message: '¿Desea proceder con esta operación?',
+                      icon: Icons.help_outline,
+                      color: GlobalColors.primary,
+                      confirmText: 'Continuar',
+                      cancelText: 'Cancelar',
+                    );
                   },
                 ),
                 const SizedBox(
@@ -419,7 +361,7 @@ class AlertPage extends LayoutWidget {
     );
   }
 
-  // Función para mostrar alerta personalizada con colores CETAM consistentes
+  // Custom alert dialog with consistent CETAM colors
   void _showCustomAlert({
     required BuildContext context,
     required String title,
@@ -441,7 +383,7 @@ class AlertPage extends LayoutWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Icono con fondo circular del color correspondiente
+                // Icon with circular background
                 Container(
                   width: 80,
                   height: 80,
@@ -478,7 +420,7 @@ class AlertPage extends LayoutWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-                // Botón de confirmación
+                // Confirm button
                 SizedBox(
                   width: double.infinity,
                   height: 48,
@@ -509,7 +451,7 @@ class AlertPage extends LayoutWidget {
     );
   }
 
-  // Función para mostrar alerta de confirmación
+  // Custom confirmation alert dialog
   void _showCustomConfirmAlert({
     required BuildContext context,
     required String title,
@@ -532,7 +474,7 @@ class AlertPage extends LayoutWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Icono con fondo circular
+                // Icon with circular background
                 Container(
                   width: 80,
                   height: 80,
@@ -547,7 +489,7 @@ class AlertPage extends LayoutWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // Título
+                // Title
                 Text(
                   title,
                   style: TextStyle(
@@ -558,7 +500,7 @@ class AlertPage extends LayoutWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 12),
-                // Mensaje
+                // Message
                 Text(
                   message,
                   style: const TextStyle(
@@ -569,7 +511,7 @@ class AlertPage extends LayoutWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
-                // Botones de acción
+                // Action buttons
                 Row(
                   children: [
                     Expanded(
@@ -601,7 +543,7 @@ class AlertPage extends LayoutWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).pop();
-                            // Aquí iría la acción confirmada
+                            // Action confirmed - show feedback
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Acción confirmada'),
@@ -632,6 +574,180 @@ class AlertPage extends LayoutWidget {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  // Simple alert dialog with minimal design
+  void _showSimpleAlert({
+    required BuildContext context,
+    required String title,
+    required String message,
+    required IconData icon,
+    required Color color,
+    required String confirmText,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          contentPadding: const EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Icon
+              Icon(
+                icon,
+                size: 56,
+                color: color,
+              ),
+              const SizedBox(height: 16),
+              // Title
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: GlobalColors.text,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              // Message
+              Text(
+                message,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: GlobalColors.textSecondary,
+                  height: 1.4,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              style: TextButton.styleFrom(
+                backgroundColor: color,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                confirmText,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Simple confirmation alert dialog
+  void _showSimpleConfirmAlert({
+    required BuildContext context,
+    required String title,
+    required String message,
+    required IconData icon,
+    required Color color,
+    required String confirmText,
+    required String cancelText,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          contentPadding: const EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Icon
+              Icon(
+                icon,
+                size: 56,
+                color: color,
+              ),
+              const SizedBox(height: 16),
+              // Title
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: GlobalColors.text,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              // Message
+              Text(
+                message,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: GlobalColors.textSecondary,
+                  height: 1.4,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              style: TextButton.styleFrom(
+                foregroundColor: color,
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              ),
+              child: Text(
+                cancelText,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Action confirmed
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Acción confirmada'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
+              style: TextButton.styleFrom(
+                backgroundColor: color,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                confirmText,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
